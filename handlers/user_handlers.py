@@ -1,15 +1,11 @@
-from aiogram import Bot, F, Router
-from aiogram.exceptions import TelegramBadRequest
-from aiogram.filters import Command, CommandStart
-from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery, Message
-
-from errors import errors
+from aiogram import F, Router
+from aiogram.types import Message
 
 
 router: Router = Router()
 
 
-@router.message(CommandStart())
-async def process_start_command(message: Message):
-    ...
+@router.message(F.content_type == 'text')
+async def process_message(message: Message):
+    """Принимает все текстовые сообщения."""
+    await message.answer(text="echo")
